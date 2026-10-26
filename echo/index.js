@@ -211,24 +211,26 @@ function Client() {
 
     debug('request options', requestOptions);
 
+    var onError = (e) => {
+      error('[echoClient] addEvents error', e);
+      var errorCode = codesAndLabels.REQUEST_ERROR;
+
+      var errorResponse = {
+        code: errorCode,
+        label: codesAndLabels[errorCode],
+      };
+
+      error('[echoClient] addEvents error response', errorResponse);
+      callback(errorResponse);
+    };
+
     var body = '';
     const r = http.request(requestOptions, resp => {
       resp.on("data", d => {
         body += d;
       });
 
-      resp.on('error', (e) => {
-        error('[echoClient] addEvents error', e);
-        var errorCode = codesAndLabels.REQUEST_ERROR;
-
-        var errorResponse = {
-          code: errorCode,
-          label: codesAndLabels[errorCode],
-        };
-
-        error('[echoClient] addEvents error response', errorResponse);
-        callback(errorResponse);
-      });
+      resp.on('error', onError);
 
       resp.on("end", d => {
         if (parseInt(resp.statusCode / 100) !== 2) {
@@ -249,6 +251,7 @@ function Client() {
       });
     });
 
+    r.on('error', onError);
     r.write(JSON.stringify(data));
     r.end();
   };
@@ -311,24 +314,26 @@ function Client() {
 
     debug('request options', requestOptions);
 
+    var onError = (e) => {
+      error('[echoClient] queryAnalytics error', e);
+      var errorCode = codesAndLabels.REQUEST_ERROR;
+
+      var errorResponse = {
+        code: errorCode,
+        label: codesAndLabels[errorCode],
+      };
+
+      error('[echoClient] queryAnalytics error response', errorResponse);
+      callback(errorResponse);
+    };
+
     var body = '';
     const r = http.request(requestOptions, resp => {
       resp.on("data", d => {
         body += d;
       });
 
-      resp.on('error', (e) => {
-        error('[echoClient] addEvents error', e);
-        var errorCode = codesAndLabels.REQUEST_ERROR;
-
-        var errorResponse = {
-          code: errorCode,
-          label: codesAndLabels[errorCode],
-        };
-
-        error('[echoClient] addEvents error response', errorResponse);
-        callback(errorResponse);
-      });
+      resp.on('error', onError);
 
       resp.on("end", d => {
         if (parseInt(resp.statusCode / 100) !== 2) {
@@ -354,6 +359,7 @@ function Client() {
       });
     });
 
+    r.on('error', onError);
     r.end();
   };
 
