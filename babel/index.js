@@ -107,6 +107,7 @@ BabelClient.prototype.headTargetFeed = function headTargetFeed(target, token, pa
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 
@@ -207,9 +208,7 @@ BabelClient.prototype.requestAsync = async function (requestOptions) {
         body += d;
       });
 
-      resp.on('error', (e) => {
-        callback(e);
-      });
+      resp.on('error', reject);
 
       resp.on("end", d => {
         if (parseInt(resp.statusCode / 100) !== 2) {
@@ -230,6 +229,7 @@ BabelClient.prototype.requestAsync = async function (requestOptions) {
       });
     });
 
+    r.on('error', reject);
     r.end();
   });
 }
@@ -257,6 +257,7 @@ async function getTargetFeedAsync(target, token, hydrate, callback) {
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 
@@ -321,6 +322,7 @@ BabelClient.prototype.getTargetFeed = function getTargetFeed(target, token, hydr
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 
@@ -374,6 +376,7 @@ BabelClient.prototype.getFeeds = function getFeeds(feeds, token, callback) {
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 
@@ -416,15 +419,12 @@ BabelClient.prototype.getAnnotation = function getAnnotation(token, id, callback
         body += d;
       });
 
-      r.on('error', (err) => {
-        callback(err);
-      });
-
       resp.on("end", d => {
         self._parseJSON(resp, body, callback);
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 
@@ -471,15 +471,12 @@ BabelClient.prototype.getAnnotations = function getAnnotations(token, querystrin
         body += d;
       });
 
-      r.on('error', (err) => {
-        callback(err);
-      });
-
       resp.on("end", d => {
         self._parseJSON(resp, body, callback);
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 
@@ -598,6 +595,7 @@ BabelClient.prototype.createAnnotation = function createAnnotation(token, data, 
       });
     });
 
+    r.on('error', callback);
     r.write(JSON.stringify(data));
     r.end();
 };
@@ -707,6 +705,7 @@ BabelClient.prototype.updateAnnotation = function updateAnnotation(token, data, 
       });
     });
 
+    r.on('error', callback);
     r.write(JSON.stringify(data));
     r.end();
 };
@@ -761,6 +760,7 @@ BabelClient.prototype.deleteAnnotation = function deleteAnnotation(token, annota
       });
     });
 
+    r.on('error', callback);
     r.end();
 };
 

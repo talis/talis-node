@@ -1579,4 +1579,45 @@ describe("Babel Node Client Test Suite", function(){
             babelClient._getBaseURL().should.equal(config.babel_host);
         });
     });
+
+    describe("- Connection errors", function(){
+        var closedPort;
+
+        before(function(done){
+            // grab a free port then close it, so connections to it are refused
+            var server = require('net').createServer().listen(0, '127.0.0.1', function(){
+                closedPort = server.address().port;
+                server.close(done);
+            });
+        });
+
+        var annotation = {
+            _id: 'id',
+            hasBody: {format: 'text/plain', type: 'Text'},
+            hasTarget: {uri: 'http://example.com'},
+            annotatedBy: 'me'
+        };
+
+        var calls = {
+            headTargetFeed: function(c, cb){ c.headTargetFeed('target', 'token', cb); },
+            getEntireTargetFeed: function(c, cb){ c.getEntireTargetFeed('target', 'token', false, cb); },
+            getTargetFeed: function(c, cb){ c.getTargetFeed('target', 'token', false, cb); },
+            getFeeds: function(c, cb){ c.getFeeds(['feed'], 'token', cb); },
+            getAnnotation: function(c, cb){ c.getAnnotation('token', 'id', cb); },
+            getAnnotations: function(c, cb){ c.getAnnotations('token', {}, cb); },
+            createAnnotation: function(c, cb){ c.createAnnotation('token', annotation, cb); },
+            updateAnnotation: function(c, cb){ c.updateAnnotation('token', annotation, cb); },
+            deleteAnnotation: function(c, cb){ c.deleteAnnotation('token', 'id', cb); }
+        };
+
+        Object.keys(calls).forEach(function(name){
+            it("- " + name + " should pass a connection error to the callback", function(done){
+                var babelClient = babel.createClient({babel_host: 'http://127.0.0.1', babel_port: closedPort});
+                calls[name](babelClient, function(err){
+                    err.code.should.equal('ECONNREFUSED');
+                    done();
+                });
+            });
+        });
+    });
 });

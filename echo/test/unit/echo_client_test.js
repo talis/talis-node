@@ -490,4 +490,32 @@ describe("Echo Node Client Test Suite", function(){
             });
         }); 
     });
+
+    describe("- Connection errors", function(){
+        var closedPort;
+
+        before(function(done){
+            // grab a free port then close it, so connections to it are refused
+            var server = require('net').createServer().listen(0, '127.0.0.1', function(){
+                closedPort = server.address().port;
+                server.close(done);
+            });
+        });
+
+        it("- addEvents should pass a connection error to the callback", function(done){
+            var echoClient = echo.createClient({echo_endpoint: 'http://127.0.0.1:' + closedPort});
+            echoClient.addEvents('token', {class: 'class', source: 'source'}, function(err){
+                err.code.should.equal(echo.echoErrors.REQUEST_ERROR);
+                done();
+            });
+        });
+
+        it("- queryAnalytics should pass a connection error to the callback", function(done){
+            var echoClient = echo.createClient({echo_endpoint: 'http://127.0.0.1:' + closedPort});
+            echoClient.queryAnalytics('token', 'hits', {class: 'class'}, false, function(err){
+                err.code.should.equal(echo.echoErrors.REQUEST_ERROR);
+                done();
+            });
+        });
+    });
 });
