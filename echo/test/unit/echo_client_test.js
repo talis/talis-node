@@ -110,7 +110,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .post('/1/events')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [401, {"error": "invalid_token"}];
                 });
 
@@ -130,7 +130,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .post('/1/events')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [200, {}];
                 });
 
@@ -232,7 +232,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=testclass&source=testsources&property=testproperty&interval=testinterval&group_by=testgroupby&key=testkey&value=testvalue&from=testfrom&to=testto&percentile=testpercentile&user=testuser&user.include=includeuser&user.exclude=excludeuser&filter=testfilter&filter.test=testfilter&n=testn&n.something=something')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     var data = "{\"head\": {\"type\": \"sum\",\"class\": \"player.timer.2\",\"property\": \"interval_with_decay\",\"group_by\": \"user\",\"filter\": {\"module_id\": \"5847ed0ef81ebd1f1b000001\",\"resource_id\": \"5899a87fd42410f2c9000001\"},\"from\": \"2016-08-29T00:00:00\",\"to\": \"2017-05-18T00:00:00\",\"count\": 2},\"results\": [{\"user\": \"8av3Jaj__vC9v9VIY_P-1w\",\"interval_with_decay\": 182920},{\"user\": \"d17T05nNTjG50sAp_R3RvQ\",\"interval_with_decay\": 21315}]}";
                     return [200, data];
                 });
@@ -279,7 +279,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=testclass')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [400, {}];
                 });
 
@@ -307,7 +307,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=testclass')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [401, {"error": "invalid_token"}];
                 });
 
@@ -327,7 +327,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=player.timer.2&property=interval_with_decay&group_by=user&filter.module_id=5847ed0ef81ebd1f1b000001&user.exclude=qVyfsQhlMY0T2_Bl7eotrg&from=2017-02-01T00%3A00%3A00&to=2017-02-13T00%3A00%3A00')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     var data = "{\"head\": {\"type\": \"sum\",\"class\": \"player.timer.2\",\"property\": \"interval_with_decay\",\"group_by\": \"user\",\"filter\": {\"module_id\": \"5847ed0ef81ebd1f1b000001\"},\"user\": {\"exclude\": \"qVyfsQhlMY0T2_Bl7eotrg\"},\"from\": \"2017-02-01T00:00:00\",\"to\": \"2017-02-13T00:00:00\",\"count\": 2},\"results\": [{\"user\": \"8av3Jaj__vC9v9VIY_P-1w\",\"interval_with_decay\": 182920},{\"user\": \"d17T05nNTjG50sAp_R3RvQ\",\"interval_with_decay\": 21315}]}";
                     return [200, data];
                 });
@@ -365,7 +365,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=player.timer.2&property=interval_with_decay&group_by=user&filter.module_id=5847ed0ef81ebd1f1b000001&user.exclude=qVyfsQhlMY0T2_Bl7eotrg&from=2017-02-01T00%3A00%3A00&to=2017-02-13T00%3A00%3A00')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                 var data = "{\"head\": {\"type\": \"sum\",\"class\": \"player.timer.2\",\"property\": \"interval_with_decay\",\"group_by\": \"user\",\"filter\": {\"module_id\": \"5847ed0ef81ebd1f1b000001\"},\"user\": {\"exclude\": \"qVyfsQhlMY0T2_Bl7eotrg\"},\"from\": \"2017-02-01T00:00:00\",\"to\": \"2017-02-13T00:00:00\",\"count\": 2},\"results\": [{\"user\": \"8av3Jaj__vC9v9VIY_P-1w\",\"interval_with_decay\": 182920},{\"user\": \"d17T05nNTjG50sAp_R3RvQ\",\"interval_with_decay\": 21315}]}";
                     return [200, data];
                 });
@@ -405,7 +405,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=player.timer.2&property=interval_with_decay&group_by=user&filter.module_id=5847ed0ef81ebd1f1b000001&user.exclude=qVyfsQhlMY0T2_Bl7eotrg&from=2017-02-01T00%3A00%3A00&to=2017-02-13T00%3A00%3A00')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [200, data];
                 });
 
@@ -436,7 +436,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=player.timer.2&property=interval_with_decay&group_by=user&filter.module_id=5847ed0ef81ebd1f1b000001&user.exclude=qVyfsQhlMY0T2_Bl7eotrg&from=2017-02-01T00%3A00%3A00&to=2017-02-13T00%3A00%3A00')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [400, data];
                 });
 
@@ -467,7 +467,7 @@ describe("Echo Node Client Test Suite", function(){
             nock(endPoint)
                 .get('/1/analytics/sum?class=player.timer.2&property=interval_with_decay&group_by=user&filter.module_id=5847ed0ef81ebd1f1b000001&user.exclude=qVyfsQhlMY0T2_Bl7eotrg&from=2017-02-01T00%3A00%3A00&to=2017-02-13T00%3A00%3A00')
                 .reply(function(uri, requestBody){
-                    this.req.headers['user-agent'].should.equal('talis-node/0.2.3');
+                    this.req.headers['user-agent'].should.equal('talis-node/0.2.4');
                     return [400, data];
                 });
 
