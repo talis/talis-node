@@ -20,19 +20,19 @@
     "jsonwebtoken": "9.0.3",
     "lodash": "4.17.21",
     "md5": "2.2.1",
-    "node-cache": "4.2.0",
-    "uuid": "2.0.2"
+    "node-cache": "5.1.2",
+    "uuid": "14.0.3"
   },
   "devDependencies": {
-    "debug": "2.6.9",
-    "js-beautify": "1.8.9",
+    "debug": "4.4.3",
+    "js-beautify": "2.0.3",
     "jshint": "2.10.1",
     "leche": "2.2.3",
-    "mocha": "5.2.0",
-    "nock": "13.3.3",
+    "mocha": "12.0.3",
+    "nock": "15.0.2",
     "proxyquire": "2.1.0",
     "should": "13.2.3",
-    "sinon": "3.0.0"
+    "sinon": "22.1.0"
   },
   "repository": {
     "type": "git",
